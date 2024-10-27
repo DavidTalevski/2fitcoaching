@@ -3328,3 +3328,18 @@ ol {
 		font-size: 28px;
 	}
 }
+
+.lazy-image {
+    background-color: #f0f0f0; /* Placeholder color */
+    background-size: cover;
+    background-position: center;
+    min-height: 300px; /* Adjust based on layout */
+}
+
+/* .lazy-video {
+    display: none;
+} */
+
+.lazy-video[src] {
+    display: block; /* Show once the video is loaded */
+}

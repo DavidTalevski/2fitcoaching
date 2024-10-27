@@ -168,3 +168,42 @@
     });
 
 })(jQuery);
+
+document.addEventListener("DOMContentLoaded", () => {
+    const lazyVideos = document.querySelectorAll(".lazy-video");
+    const lazyImages = document.querySelectorAll(".lazy-image");
+
+    const observerOptions = {
+        root: null,       // Uses the viewport as root
+        threshold: 0.1,   // Trigger when 10% of the element is in view
+    };
+
+    const onIntersection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.tagName === "VIDEO") {
+                    const video = entry.target;
+                    video.src = video.dataset.src;
+                    video.load();   // Ensure the video loads
+                    video.play();   // Autoplay after loading
+
+                    video.addEventListener("loadeddata", () => {
+                        video.play(); // Ensure it autoplays when fully loaded
+                    });
+
+                } else {
+                    const imageDiv = entry.target;
+                    const src = imageDiv.dataset.src;
+                    imageDiv.style.backgroundImage = `url(${src})`;
+                }
+                observer.unobserve(entry.target); // Stop observing once loaded
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(onIntersection, observerOptions);
+
+    lazyVideos.forEach(video => observer.observe(video));
+    lazyImages.forEach(image => observer.observe(image));
+});
+
