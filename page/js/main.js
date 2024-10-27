@@ -168,3 +168,58 @@
     });
 
 })(jQuery);
+
+document.addEventListener("DOMContentLoaded", () => {
+    const lazyVideos = document.querySelectorAll(".lazy-video");
+    const lazyImages = document.querySelectorAll(".lazy-image");
+
+    const observerOptions = {
+        root: null,       // Uses the viewport as root
+        threshold: 0.1,   // Trigger when 10% of the element is in view
+    };
+
+    const onIntersection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Attempt to find the spinner in the parent container
+                const spinner = entry.target.parentNode.querySelector('.spinner'); 
+                
+                // Proceed only if the spinner is found
+                if (spinner) {
+                    if (entry.target.tagName === "VIDEO") {
+                        const video = entry.target;
+                        spinner.style.display = "block"; // Show the spinner
+                        video.style.display = "block"; // Show the spinner
+                        video.src = video.dataset.src;
+                        video.load();   // Ensure the video loads
+
+                        video.addEventListener("loadeddata", () => {
+                            video.play(); // Autoplay when fully loaded
+                            spinner.style.display = "none"; // Hide the spinner
+                        });
+
+                    } else {
+                        const imageDiv = entry.target;
+                        const src = imageDiv.dataset.src;
+                        spinner.style.display = "block"; // Show the spinner
+                        imageDiv.style.backgroundImage = `url(${src})`;
+                        const img = new Image(); // Create a new Image object to preload
+                        img.src = src; // Set the source to trigger loading
+
+                        img.onload = () => {
+                            spinner.style.display = "none"; // Hide the spinner when loaded
+                        };
+                    }
+                    observer.unobserve(entry.target); // Stop observing once loaded
+                } else {
+                    console.warn('Spinner not found for:', entry.target);
+                }
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(onIntersection, observerOptions);
+
+    lazyVideos.forEach(video => observer.observe(video));
+    lazyImages.forEach(image => observer.observe(image));
+});

@@ -153,6 +153,7 @@
             </div>
         </div>
     </section>
+    
     <!-- Hero Section End -->
 
 
@@ -217,7 +218,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="class-item">
                         <div class="ci-pic">
-                            <img src="img/classes/class-1.webp" alt="">
+                            <img src="img/classes/class-1.webp" loading="lazy" alt="">
                         </div>
                         <div class="ci-text">
                             <!-- <span>Individual</span> -->
@@ -229,7 +230,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="class-item">
                         <div class="ci-pic">
-                            <img src="img/classes/class-2.webp" alt="">
+                            <img src="img/classes/class-2.webp"  loading="lazy" alt="">
                         </div>
                         <div class="ci-text">
                             <!-- <span>Group</span> -->
@@ -241,7 +242,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="class-item">
                         <div class="ci-pic">
-                            <img src="img/classes/class-3.webp" alt="">
+                            <img src="img/classes/class-3.webp"  loading="lazy" alt="">
                         </div>
                         <div class="ci-text">
                             <!-- <span>Group</span> -->
@@ -405,34 +406,44 @@
             <div class="grid-sizer">
                 <!-- First video -->
                 <div class="gs-item grid-wide set-bg" data-setbg="video/gallery-1.mp4">
-                    <video class="video-content" src="video/gallery-1.mp4" playsinline autoplay muted loop></video>
+                    <video class="video-content lazy-video" data-src="video/gallery-1.mp4" playsinline muted loop></video>
+                    <div class="spinner"></div> <!-- Spinner for video -->
                 </div>
     
                 <!-- Other images -->
-                <div class="gs-item set-bg" data-setbg="img/gallery/gallery-2.webp">
-                    <!-- <a href="img/gallery/gallery-2.webp" class="thumb-icon image-popup"><i class="fa fa-picture-o"></i></a> -->
+                <div>
+                    <div class="gs-item set-bg lazy-image" data-src="img/gallery/gallery-2.webp">
+                        <div class="spinner"></div> <!-- Spinner for image -->
+                    </div>
                 </div>
-                <div class="gs-item set-bg" data-setbg="img/gallery/gallery-3.webp">
-                    <!-- <a href="img/gallery/gallery-3.webp" class="thumb-icon image-popup"><i class="fa fa-picture-o"></i></a> -->
+
+                <div>
+                    <div class="gs-item set-bg lazy-image" data-src="img/gallery/gallery-3.webp">
+                        <div class="spinner"></div> <!-- Spinner for image -->
+                    </div>
                 </div>
-                <div class="gs-item set-bg" data-setbg="img/gallery/gallery-4.webp">
-                    <!-- <a href="img/gallery/gallery-4.webp" class="thumb-icon image-popup"><i class="fa fa-picture-o"></i></a> -->
+
+                <div>
+                    <div class="gs-item set-bg lazy-image" data-src="img/gallery/gallery-4.webp">
+                        <div class="spinner"></div> <!-- Spinner for image -->
+                    </div>
                 </div>
-                <div class="gs-item set-bg"   data-setbg="img/gallery/gallery-5.webp">
-                    <!-- <a href="img/gallery/gallery-5.webp" class="thumb-icon image-popup"><i class="fa fa-picture-o"></i></a> -->
+
+                <div>
+                    <div class="gs-item set-bg lazy-image" data-src="img/gallery/gallery-5.webp">
+                        <div class="spinner"></div> <!-- Spinner for image -->
+                    </div>
                 </div>
     
                 <!-- Second video -->
                 <div class="gs-item grid-wide set-bg" data-setbg="video/gallery-2.mp4">
-                    <video class="video-content" src="video/gallery-2.mp4" playsinline autoplay muted loop></video>
+                    <video class="video-content lazy-video" data-src="video/gallery-2.mp4" playsinline muted loop></video>
+                    <div class="spinner"></div> <!-- Spinner for video -->
                 </div>
-    
-                <!-- <div class="gs-item grid-wide set-bg" data-setbg="img/gallery/gallery-6.webp"> -->
-                    <!-- <a href="img/gallery/gallery-6.webp" class="thumb-icon image-popup"><i class="fa fa-picture-o"></i></a> -->
-                <!-- </div> -->
             </div>
         </div>
     </div>
+    
     
     
 
