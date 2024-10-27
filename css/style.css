@@ -3338,7 +3338,7 @@ ol {
 
 
 .lazy-video[src] {
-    display: block; /* Show once the video is loaded */
+    display: none; /* Show once the video is loaded */
 }
 
 .spinner {

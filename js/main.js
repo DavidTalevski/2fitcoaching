@@ -189,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (entry.target.tagName === "VIDEO") {
                         const video = entry.target;
                         spinner.style.display = "block"; // Show the spinner
+                        video.style.display = "block"; // Show the spinner
                         video.src = video.dataset.src;
                         video.load();   // Ensure the video loads
 
