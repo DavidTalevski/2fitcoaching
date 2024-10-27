@@ -181,22 +181,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const onIntersection = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                if (entry.target.tagName === "VIDEO") {
-                    const video = entry.target;
-                    video.src = video.dataset.src;
-                    video.load();   // Ensure the video loads
-                    video.play();   // Autoplay after loading
+                // Attempt to find the spinner in the parent container
+                const spinner = entry.target.parentNode.querySelector('.spinner'); 
+                
+                // Proceed only if the spinner is found
+                if (spinner) {
+                    if (entry.target.tagName === "VIDEO") {
+                        const video = entry.target;
+                        spinner.style.display = "block"; // Show the spinner
+                        video.src = video.dataset.src;
+                        video.load();   // Ensure the video loads
 
-                    video.addEventListener("loadeddata", () => {
-                        video.play(); // Ensure it autoplays when fully loaded
-                    });
+                        video.addEventListener("loadeddata", () => {
+                            video.play(); // Autoplay when fully loaded
+                            spinner.style.display = "none"; // Hide the spinner
+                        });
 
+                    } else {
+                        const imageDiv = entry.target;
+                        const src = imageDiv.dataset.src;
+                        spinner.style.display = "block"; // Show the spinner
+                        imageDiv.style.backgroundImage = `url(${src})`;
+                        const img = new Image(); // Create a new Image object to preload
+                        img.src = src; // Set the source to trigger loading
+
+                        img.onload = () => {
+                            spinner.style.display = "none"; // Hide the spinner when loaded
+                        };
+                    }
+                    observer.unobserve(entry.target); // Stop observing once loaded
                 } else {
-                    const imageDiv = entry.target;
-                    const src = imageDiv.dataset.src;
-                    imageDiv.style.backgroundImage = `url(${src})`;
+                    console.warn('Spinner not found for:', entry.target);
                 }
-                observer.unobserve(entry.target); // Stop observing once loaded
             }
         });
     };
@@ -206,4 +222,3 @@ document.addEventListener("DOMContentLoaded", () => {
     lazyVideos.forEach(video => observer.observe(video));
     lazyImages.forEach(image => observer.observe(image));
 });
-
