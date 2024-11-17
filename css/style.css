@@ -3377,3 +3377,19 @@ ol {
 .gallery-section {
     position: relative; /* To position the spinner correctly */
 }
+
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
