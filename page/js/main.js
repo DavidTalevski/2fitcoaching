@@ -181,35 +181,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const onIntersection = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Attempt to find the spinner in the parent container
                 const spinner = entry.target.parentNode.querySelector('.spinner'); 
-                
-                // Proceed only if the spinner is found
+
                 if (spinner) {
                     if (entry.target.tagName === "VIDEO") {
                         const video = entry.target;
                         spinner.style.display = "block"; // Show the spinner
-                        video.style.display = "block"; // Show the spinner
+                        video.style.display = "none";   // Hide the video initially
                         video.src = video.dataset.src;
                         video.load();   // Ensure the video loads
 
                         video.addEventListener("loadeddata", () => {
-                            video.play(); // Autoplay when fully loaded
+                            video.style.display = "block"; // Show the video once loaded
+                            video.classList.add("fade-in"); // Add fade-in animation
                             spinner.style.display = "none"; // Hide the spinner
-                            video.classList.add("fade-in"); // Add fade-in class
+                            video.play(); // Autoplay the video
                         });
 
                     } else {
                         const imageDiv = entry.target;
-                        const src = imageDiv.dataset.src;
                         spinner.style.display = "block"; // Show the spinner
-                        imageDiv.style.backgroundImage = `url(${src})`;
+                        imageDiv.style.opacity = "0";   // Ensure the image is hidden initially
+                        const src = imageDiv.dataset.src;
+
                         const img = new Image(); // Create a new Image object to preload
                         img.src = src; // Set the source to trigger loading
 
                         img.onload = () => {
                             spinner.style.display = "none"; // Hide the spinner when loaded
-                            imageDiv.classList.add("fade-in"); // Add fade-in class
+                            imageDiv.style.backgroundImage = `url(${src})`; // Set the image
+                            imageDiv.classList.add("fade-in"); // Add fade-in animation
                         };
                     }
                     observer.unobserve(entry.target); // Stop observing once loaded
