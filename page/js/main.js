@@ -196,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         video.addEventListener("loadeddata", () => {
                             video.play(); // Autoplay when fully loaded
                             spinner.style.display = "none"; // Hide the spinner
+                            video.classList.add("fade-in"); // Add fade-in class
                         });
 
                     } else {
@@ -208,6 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         img.onload = () => {
                             spinner.style.display = "none"; // Hide the spinner when loaded
+                            imageDiv.classList.add("fade-in"); // Add fade-in class
                         };
                     }
                     observer.unobserve(entry.target); // Stop observing once loaded
